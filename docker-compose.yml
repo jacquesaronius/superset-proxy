@@ -1,0 +1,15 @@
+services:
+  superset:
+    container_name: superset
+    image: apache/superset
+    environment:
+      - SUPERSET_SECRET_KEY=superdupersecret
+  proxy:
+    container_name: proxy
+    image: nginx
+    ports:
+      - 443:443
+    volumes:
+      - ./certificate.cer:/certificate.cer
+      - ./key.key:/key.key
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
